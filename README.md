@@ -1,4 +1,4 @@
-# CPC-Tree
+# cpc-tree
 
 A Python utility for processing and structuring Cooperative Patent Classification (CPC) data. This tool transforms raw CPC classification XML files into accessible Python data structures and JSON output, making it easy to work with patent classification hierarchies programmatically.
 
@@ -211,5 +211,6 @@ cpc-tree/
 5. Commit your changes (`git commit -m 'Add amazing feature'`)
 6. Push to the branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
+
 
 
