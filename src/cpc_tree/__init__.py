@@ -1,10 +1,10 @@
-import argparse
 import logging
-import json
 import os
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 import xml.etree.ElementTree as ET
+
+__all__ = ["CPCTreeNode", "load_cpc_tree", "build_cpc_tree"]
 
 
 @dataclass
@@ -110,17 +110,3 @@ def build_cpc_tree(directory: str) -> Dict[str, Any]:
             cpc_tree[symbol] = parse_item(top_level_item, directory)
 
     return cpc_tree
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Build the CPC tree from XML files.")
-    parser.add_argument(
-        "xml_directory",
-        type=str,
-        help="Path to the directory containing CPC XML files (should include cpc-scheme.xml)",
-    )
-    args = parser.parse_args()
-    xml_dir: str = args.xml_directory
-    cpc_tree: Dict[str, Any] = build_cpc_tree(xml_dir)
-    with open("cpc_tree.json", "w+") as f:
-        json.dump(cpc_tree, f, indent=4)
