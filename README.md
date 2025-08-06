@@ -66,6 +66,8 @@ This will generate a `cpc_tree.json` file containing the complete CPC hierarchy.
 
 #### Building the CPC Tree
 
+Download and decompress (CPCSchemeXML202508.zip)[https://www.cooperativepatentclassification.org/sites/default/files/cpc/bulk/CPCSchemeXML202508.zip] in the repo directory.
+
 ```python
 from cpc_tree import build_cpc_tree
 
@@ -231,3 +233,4 @@ This project is open source. Please check the repository for license details.
 
 - Built for processing Cooperative Patent Classification (CPC) data
 - Designed to work with official CPC XML scheme files from patent offices
+
