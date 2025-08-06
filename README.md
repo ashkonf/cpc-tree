@@ -212,14 +212,4 @@ cpc-tree/
 6. Push to the branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
 
-## License
-
-This project is open source. Please check the repository for license details.
-
-## Acknowledgments
-
-- Built for processing Cooperative Patent Classification (CPC) data
-- Designed to work with official CPC XML scheme files from patent offices
-
-
 
