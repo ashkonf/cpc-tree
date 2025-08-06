@@ -68,6 +68,7 @@ This will generate a `cpc_tree.json` file containing the complete CPC hierarchy.
 
 Download and decompress [CPCSchemeXML202508.zip](https://www.cooperativepatentclassification.org/sites/default/files/cpc/bulk/CPCSchemeXML202508.zip) in the repo directory.
 
+Then run:
 ```python
 from cpc_tree import build_cpc_tree
 
@@ -79,7 +80,7 @@ print(cpc_tree_data["A"]["title"])  # "HUMAN NECESSITIES"
 print(cpc_tree_data["A"]["children"]["A01"]["title"])  # "AGRICULTURE"
 ```
 
-#### Loading as Objects
+#### Loading the Generated JSON as Objects
 
 ```python
 from cpc_tree import build_cpc_tree, load_cpc_tree
@@ -96,20 +97,6 @@ print(f"Title: {root_node.title}")  # "HUMAN NECESSITIES"
 # Access children
 agriculture_node = root_node.children["A01"]
 print(f"Agriculture: {agriculture_node.title}")  # "AGRICULTURE"
-```
-
-#### Working with JSON Output
-
-```python
-import json
-from cpc_tree import load_cpc_tree
-
-# Load from generated JSON file
-with open("cpc_tree.json", "r") as f:
-    cpc_data = json.load(f)
-
-# Convert to objects for navigation
-cpc_tree = load_cpc_tree(cpc_data)
 ```
 
 ## Data Structure
@@ -138,7 +125,7 @@ Each node contains:
 Builds the complete CPC tree from XML files in the specified directory.
 
 **Parameters:**
-- `directory`: Path to directory containing CPC XML files (must include `cpc-scheme.xml`)
+- `directory`: Path to directory containing [CPCSchemeXML202508.zip](https://www.cooperativepatentclassification.org/sites/default/files/cpc/bulk/CPCSchemeXML202508.zip).
 
 **Returns:** Dictionary representation of the CPC hierarchy
 
@@ -233,5 +220,6 @@ This project is open source. Please check the repository for license details.
 
 - Built for processing Cooperative Patent Classification (CPC) data
 - Designed to work with official CPC XML scheme files from patent offices
+
 
 
