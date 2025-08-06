@@ -72,10 +72,10 @@ Process CPC XML files from a directory containing the classification scheme:
 
 ```bash
 # Using UV
-uv run python cpc_tree.py /path/to/xml/directory
+uv run python -m cpc_tree /path/to/xml/directory
 
 # Using Python directly
-python cpc_tree.py /path/to/xml/directory
+python -m cpc_tree /path/to/xml/directory
 ```
 
 This will generate a `cpc_tree.json` file containing the complete CPC hierarchy.
@@ -219,13 +219,17 @@ uv run pre-commit run --all-files
 
 ```
 cpc-tree/
-├── cpc_tree.py          # Main processing logic
-├── test_cpc_tree.py     # Test suite
-├── cpc_tree.json        # Generated CPC hierarchy (large file)
-├── pyproject.toml       # Project configuration
-├── uv.lock             # Locked dependencies
+├── src/
+│   └── cpc_tree/
+│       ├── __init__.py      # Main processing logic
+│       └── __main__.py      # CLI entry point
+├── tests/
+│   └── test_cpc_tree.py     # Test suite
+├── cpc_tree.json            # Generated CPC hierarchy (large file)
+├── pyproject.toml           # Project configuration
+├── uv.lock                  # Locked dependencies
 ├── .pre-commit-config.yaml  # Code quality hooks
-└── README.md           # This file
+└── README.md                # This file
 ```
 
 ## Contributing
