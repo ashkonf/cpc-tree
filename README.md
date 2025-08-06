@@ -66,6 +66,8 @@ pip install -e .
 
 ## Usage
 
+For an interactive introduction, see the [sample_usage.ipynb](examples/sample_usage.ipynb) notebook.
+
 ### Command Line Interface
 
 Process CPC XML files from a directory containing the classification scheme:
