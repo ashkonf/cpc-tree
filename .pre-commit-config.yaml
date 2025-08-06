@@ -1,0 +1,24 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.4  # Use the latest stable version
+    hooks:
+      - id: ruff
+        name: ruff check
+        entry: uv run ruff check
+        args: [--fix]  # optional: autofix issues
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format
+  - repo: local
+    hooks:
+      - id: pyright
+        name: pyright type checking
+        entry: uv run pyright
+        language: system
+        types: [python]
+      - id: pytest
+        name: pytest unit tests
+        entry: uv run python3 -m pytest
+        language: system
+        types: [python]
+
