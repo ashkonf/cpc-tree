@@ -1,14 +1,16 @@
-from pathlib import Path
-import sys
+import os
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import pytest
 
 from cpc_tree import build_cpc_tree, load_cpc_tree
 
+DATA_DIR = "CPCSchemeXML202508"
 
+
+@pytest.mark.skipif(not os.path.isdir(DATA_DIR), reason="CPC XML dataset not available")
 def test_build_cpc_tree():
     """Test building the CPC tree from XML files."""
-    cpc_tree = build_cpc_tree("CPCSchemeXML202508")
+    cpc_tree = build_cpc_tree(DATA_DIR)
 
     # Assertions for top-level 'A'
     assert "A" in cpc_tree
@@ -69,9 +71,10 @@ def test_build_cpc_tree():
     assert a01b1_04["title"].startswith("with teeth")
 
 
+@pytest.mark.skipif(not os.path.isdir(DATA_DIR), reason="CPC XML dataset not available")
 def test_load_cpc_tree():
     """Test loading the CPC tree from a dictionary into CPCTreeNode objects."""
-    cpc_tree_data = build_cpc_tree("CPCSchemeXML202508")
+    cpc_tree_data = build_cpc_tree(DATA_DIR)
     cpc_tree = load_cpc_tree(cpc_tree_data)
 
     # Check root node
