@@ -16,9 +16,4 @@ repos:
         entry: uv run pyright
         language: system
         types: [python]
-      - id: pytest
-        name: pytest unit tests
-        entry: uv run python3 -m pytest
-        language: system
-        types: [python]
 

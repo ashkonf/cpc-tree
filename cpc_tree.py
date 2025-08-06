@@ -48,37 +48,49 @@ def parse_item(item_element: ET.Element, directory: str) -> Dict[str, Any]:
 
     link_file: Optional[str] = item_element.get("link-file")
     if link_file:
-        file_path: str = os.path.join(directory, link_file)
-        if os.path.exists(file_path):
-            try:
-                tree: ET.ElementTree = ET.parse(file_path)  # type: ignore
-                root: Optional[ET.Element] = tree.getroot()
-                root_item: Optional[ET.Element] = (
-                    root.find("./classification-item") if root is not None else None
-                )
-                if root_item is not None:
-                    for sub_item in root_item.findall("./classification-item"):
-                        symbol_element: Optional[ET.Element] = sub_item.find(
-                            "classification-symbol"
-                        )
-                        if symbol_element is not None and symbol_element.text:
-                            symbol: str = symbol_element.text
-                            children[symbol] = parse_item(sub_item, directory)
-            except ET.ParseError:
-                print(f"Skipping malformed file: {file_path}")
+        children = _parse_linked_children(link_file, directory)
     else:
-        for sub_item in item_element.findall("./classification-item"):
-            symbol_element: Optional[ET.Element] = sub_item.find(
-                "classification-symbol"
-            )
-            if symbol_element is not None and symbol_element.text:
-                symbol: str = symbol_element.text
-                children[symbol] = parse_item(sub_item, directory)
+        children = _parse_direct_children(item_element, directory)
 
     if children:
         node["children"] = children
 
     return node
+
+
+def _parse_linked_children(link_file: str, directory: str) -> Dict[str, Any]:
+    """Parse children from a linked XML file."""
+    children: Dict[str, Any] = {}
+    file_path: str = os.path.join(directory, link_file)
+    if os.path.exists(file_path):
+        try:
+            tree: ET.ElementTree = ET.parse(file_path)  # type: ignore
+            root: Optional[ET.Element] = tree.getroot()
+            root_item: Optional[ET.Element] = (
+                root.find("./classification-item") if root is not None else None
+            )
+            if root_item is not None:
+                for sub_item in root_item.findall("./classification-item"):
+                    symbol_element: Optional[ET.Element] = sub_item.find(
+                        "classification-symbol"
+                    )
+                    if symbol_element is not None and symbol_element.text:
+                        symbol: str = symbol_element.text
+                        children[symbol] = parse_item(sub_item, directory)
+        except ET.ParseError:
+            print(f"Skipping malformed file: {file_path}")
+    return children
+
+
+def _parse_direct_children(item_element: ET.Element, directory: str) -> Dict[str, Any]:
+    """Parse children directly from the current XML element."""
+    children: Dict[str, Any] = {}
+    for sub_item in item_element.findall("./classification-item"):
+        symbol_element: Optional[ET.Element] = sub_item.find("classification-symbol")
+        if symbol_element is not None and symbol_element.text:
+            symbol: str = symbol_element.text
+            children[symbol] = parse_item(sub_item, directory)
+    return children
 
 
 def build_cpc_tree(directory: str) -> Dict[str, Any]:
