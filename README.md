@@ -187,6 +187,10 @@ uv run pre-commit install
 
 ### Running Tests
 
+Download and decompress CPCSchemeXML202508.zip in the repo directory.
+
+Then run:
+
 ```bash
 # Run all tests
 uv run python -m pytest
@@ -233,6 +237,7 @@ cpc-tree/
 5. Commit your changes (`git commit -m 'Add amazing feature'`)
 6. Push to the branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
+
 
 
 
