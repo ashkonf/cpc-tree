@@ -22,7 +22,10 @@ def test_build_cpc_tree():
     a01_nested = a01["children"]["A01"]
     assert isinstance(a01_nested, dict)
     assert "title" in a01_nested
-    assert a01_nested["title"] == "AGRICULTURE FORESTRY ANIMAL HUSBANDRY HUNTING TRAPPING FISHING"
+    assert (
+        a01_nested["title"]
+        == "AGRICULTURE FORESTRY ANIMAL HUSBANDRY HUNTING TRAPPING FISHING"
+    )
     assert "children" in a01_nested
     assert "A01B" in a01_nested["children"]
 
@@ -60,6 +63,7 @@ def test_build_cpc_tree():
     assert "title" in a01b1_04
     assert a01b1_04["title"].startswith("with teeth")
 
+
 def test_load_cpc_tree():
     """Test loading the CPC tree from a dictionary into CPCTreeNode objects."""
     cpc_tree_data = build_cpc_tree("CPCSchemeXML202508")
@@ -80,13 +84,18 @@ def test_load_cpc_tree():
     # Since the structure repeats, we need to go deeper to get the full title
     a01_child_node = a01_node.children["A01"]
     assert a01_child_node.code == "A01"
-    assert a01_child_node.title == "AGRICULTURE FORESTRY ANIMAL HUSBANDRY HUNTING TRAPPING FISHING"
+    assert (
+        a01_child_node.title
+        == "AGRICULTURE FORESTRY ANIMAL HUSBANDRY HUNTING TRAPPING FISHING"
+    )
     assert "A01B" in a01_child_node.children
 
     # Check 'A01B' node
     a01b_node = a01_child_node.children["A01B"]
     assert a01b_node.code == "A01B"
-    assert a01b_node.title.startswith("SOIL WORKING IN AGRICULTURE OR FORESTRY")
+    assert a01b_node.title is not None and a01b_node.title.startswith(
+        "SOIL WORKING IN AGRICULTURE OR FORESTRY"
+    )
     assert "A01B1/00" in a01b_node.children
 
     # Check a leaf node deep in the tree
@@ -94,20 +103,24 @@ def test_load_cpc_tree():
     assert "A01B1/00" in a01b1_00_node.children
     a01b1_00_leaf = a01b1_00_node.children["A01B1/00"]
     assert a01b1_00_leaf.code == "A01B1/00"
-    assert a01b1_00_leaf.title.startswith("Hand tools")
+    assert a01b1_00_leaf.title is not None and a01b1_00_leaf.title.startswith(
+        "Hand tools"
+    )
     assert "A01B1/02" in a01b1_00_leaf.children
 
     # Check a sub-leaf node
     a01b1_02_node = a01b1_00_leaf.children["A01B1/02"]
     assert a01b1_02_node.code == "A01B1/02"
-    assert a01b1_02_node.title.startswith("Spades Shovels")
+    assert a01b1_02_node.title is not None and a01b1_02_node.title.startswith(
+        "Spades Shovels"
+    )
     for code in ["A01B1/022", "A01B1/024", "A01B1/026", "A01B1/028", "A01B1/04"]:
         assert code in a01b1_02_node.children
 
     # Check a leaf node with a title
     a01b1_04_node = a01b1_02_node.children["A01B1/04"]
     assert a01b1_04_node.code == "A01B1/04"
-    assert a01b1_04_node.title.startswith("with teeth")
+    assert a01b1_04_node.title is not None and a01b1_04_node.title.startswith(
+        "with teeth"
+    )
     assert not a01b1_04_node.children
-
-
