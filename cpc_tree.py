@@ -8,29 +8,25 @@ import xml.etree.ElementTree as ET
 
 @dataclass
 class CPCTreeNode:
+    code: str
     title: Optional[str] = None
     children: Dict[str, 'CPCTreeNode'] = field(default_factory=dict)
 
 
-def load_cpc_tree(data: Any) -> Optional[CPCTreeNode]:
+def load_cpc_tree(data: Dict[str, Any]) -> Dict[str, 'CPCTreeNode']:
     """Recursively loads a CPC tree from a nested dictionary."""
-    if not isinstance(data, dict):
-        return None
-    
-    node = CPCTreeNode(
-        title=data.get('title')
-    )
 
-    children_data = data.get('children')
-    if isinstance(children_data, dict):
-        children: Dict[str, CPCTreeNode] = {}
-        for key, value in children_data.items():
-            child_node = load_cpc_tree(value)
-            if child_node is not None:
-                children[key] = child_node
-        node.children = children
-    
-    return node
+    def _load_node(code: str, node_data: Dict[str, Any]) -> 'CPCTreeNode':
+        children_data = node_data.get("children", {})
+        children = {
+            child_code: _load_node(child_code, child_data)
+            for child_code, child_data in children_data.items()
+        }
+        return CPCTreeNode(code=code, title=node_data.get("title"), children=children)
+
+    return {
+        code: _load_node(code, node_data) for code, node_data in data.items()
+    }
 
 
 def get_title(element: ET.Element) -> str:
