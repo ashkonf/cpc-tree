@@ -221,17 +221,16 @@ uv run pre-commit run --all-files
 
 ```
 cpc-tree/
-├── src/
-│   └── cpc_tree/
-│       ├── __init__.py      # Main processing logic
-│       └── __main__.py      # CLI entry point
+├── cpc_tree/            # Package containing logic and CLI
+│   ├── __init__.py      # Core processing logic
+│   └── __main__.py      # Command line entry point
 ├── tests/
-│   └── test_cpc_tree.py     # Test suite
-├── cpc_tree.json            # Generated CPC hierarchy (large file)
-├── pyproject.toml           # Project configuration
-├── uv.lock                  # Locked dependencies
+│   └── test_cpc_tree.py # Test suite
+├── cpc_tree.json        # Generated CPC hierarchy (large file)
+├── pyproject.toml       # Project configuration
+├── uv.lock             # Locked dependencies
 ├── .pre-commit-config.yaml  # Code quality hooks
-└── README.md                # This file
+└── README.md           # This file
 ```
 
 ## Contributing
