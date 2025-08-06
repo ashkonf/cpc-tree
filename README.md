@@ -2,6 +2,28 @@
 
 A Python utility for processing and structuring Cooperative Patent Classification (CPC) data. This tool transforms raw CPC classification XML files into accessible Python data structures and JSON output, making it easy to work with patent classification hierarchies programmatically.
 
+## Table of Contents
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Installation](#installation)
+  - [Using UV (Recommended)](#using-uv-recommended)
+  - [Using pip](#using-pip)
+- [Usage](#usage)
+  - [Command Line Interface](#command-line-interface)
+  - [Python API](#python-api)
+    - [Building the CPC Tree](#building-the-cpc-tree)
+    - [Loading the Generated JSON as Objects](#loading-the-generated-json-as-objects)
+- [Data Structure](#data-structure)
+- [API Reference](#api-reference)
+  - [Functions](#functions)
+  - [Classes](#classes)
+- [Development](#development)
+  - [Setup](#setup)
+  - [Running Tests](#running-tests)
+  - [Code Quality](#code-quality)
+  - [Project Structure](#project-structure)
+- [Contributing](#contributing)
+
 ## Overview
 
 The Cooperative Patent Classification (CPC) system is a hierarchical classification scheme used by patent offices worldwide. CPC-Tree simplifies working with this complex data by:
