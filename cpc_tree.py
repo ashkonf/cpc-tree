@@ -1,4 +1,5 @@
 import argparse
+import logging
 import json
 import os
 from dataclasses import dataclass, field
@@ -78,7 +79,7 @@ def _parse_linked_children(link_file: str, directory: str) -> Dict[str, Any]:
                         symbol: str = symbol_element.text
                         children[symbol] = parse_item(sub_item, directory)
         except ET.ParseError:
-            print(f"Skipping malformed file: {file_path}")
+            logging.error(f"Skipping malformed file: {file_path}")
     return children
 
 
