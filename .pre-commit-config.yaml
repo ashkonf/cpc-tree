@@ -1,19 +1,43 @@
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.4  # Use the latest stable version
+  - repo: local
     hooks:
-      - id: ruff
-        name: ruff check
-        entry: uv run ruff check
-        args: [--fix]  # optional: autofix issues
       - id: ruff-format
         name: ruff format
         entry: uv run ruff format
-  - repo: local
-    hooks:
+        language: system
+        types: [python]
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check
+        language: system
+        types: [python]
       - id: pyright
-        name: pyright type checking
+        name: pyright
         entry: uv run pyright
         language: system
         types: [python]
-
+        pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: uv run pytest --cov --cov-branch
+        language: system
+        types: [python]
+        pass_filenames: false
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-toml
+      - id: check-ast
+      - id: debug-statements
+      - id: detect-private-key
+      - id: fix-byte-order-marker
+      - id: forbid-new-submodules
+      - id: mixed-line-ending
+      - id: sort-simple-yaml

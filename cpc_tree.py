@@ -1,6 +1,6 @@
 import argparse
-import logging
 import json
+import logging
 import os
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
@@ -79,7 +79,7 @@ def _parse_linked_children(link_file: str, directory: str) -> Dict[str, Any]:
                         symbol: str = symbol_element.text
                         children[symbol] = parse_item(sub_item, directory)
         except ET.ParseError:
-            logging.error(f"Skipping malformed file: {file_path}")
+            logging.info(f"Skipping malformed file: {file_path}")
     return children
 
 
@@ -113,6 +113,9 @@ def build_cpc_tree(directory: str) -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    )
     parser = argparse.ArgumentParser(description="Build the CPC tree from XML files.")
     parser.add_argument(
         "xml_directory",
