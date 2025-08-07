@@ -206,7 +206,8 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+# Streamlit
+.streamlit/secrets.toml
 
 .DS_Store
 **/.DS_Store
-CPCSchemeXML202508
