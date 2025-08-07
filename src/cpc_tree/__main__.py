@@ -7,9 +7,7 @@ from . import build_cpc_tree
 
 def main() -> None:
     """Build the CPC tree from XML files and write it to cpc_tree.json."""
-    parser = argparse.ArgumentParser(
-        description="Build the CPC tree from XML files."
-    )
+    parser = argparse.ArgumentParser(description="Build the CPC tree from XML files.")
     parser.add_argument(
         "xml_directory",
         type=str,
