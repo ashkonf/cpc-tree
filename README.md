@@ -1,6 +1,19 @@
+<div align="center">
+
 # cpc-tree
 
+[![PyPI version](https://img.shields.io/pypi/v/your-package)](link-to-pypi-page)
+[![codecov](https://codecov.io/github/ashkonf/cpc-tree/graph/badge.svg?token=7Y596J8IYZ)](https://codecov.io/github/ashkonf/cpc-tree)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Pytest](https://img.shields.io/badge/pytest-✓-brightgreen)](https://docs.pytest.org)
+[![Pyright](https://img.shields.io/badge/pyright-✓-green)](https://github.com/microsoft/pyright)
+[![Ruff](https://img.shields.io/badge/ruff-✓-blue?logo=ruff)](https://github.com/astral-sh/ruff)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/ashkonf/cpc-tree/ci.yml?branch=main)](https://github.com/ashkonf/cpc-tree/actions/workflows/ci.yml?query=branch%3Amain)
+
 A Python utility for processing and structuring Cooperative Patent Classification (CPC) data. This tool transforms raw CPC classification XML files into accessible Python data structures and JSON output, making it easy to work with patent classification hierarchies programmatically.
+
+</div>
 
 ## Table of Contents
 - [Overview](#overview)
@@ -242,7 +255,3 @@ cpc-tree/
 5. Commit your changes (`git commit -m 'Add amazing feature'`)
 6. Push to the branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
-
-
-
-
