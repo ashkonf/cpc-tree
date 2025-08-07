@@ -12,3 +12,9 @@ dependencies = [
     "pytest-cov>=6.2.1",
     "ruff>=0.12.7",
 ]
+
+[tool.pyright]
+extraPaths = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
