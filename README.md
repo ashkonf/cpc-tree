@@ -50,6 +50,12 @@ The Cooperative Patent Classification (CPC) system is a hierarchical classificat
 
 - Python ≥ 3.11
 - `uv` package manager
+- [argparse](https://docs.python.org/3/library/argparse.html)
+- [pre-commit](https://pre-commit.com/)
+- [pyright](https://github.com/microsoft/pyright)
+- [pytest](https://docs.pytest.org/)
+- [pytest-cov](https://pytest-cov.readthedocs.io/)
+- [ruff](https://docs.astral.sh/ruff/)
 
 ## Usage
 

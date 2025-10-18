@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Structuring the CPC classification codes tree in Python."
 readme = "README.md"
 requires-python = ">=3.13"
+authors = [
+    { name = "Ashkon Farhangi", email = "ashkon.f@gmail.com" }
+]
 dependencies = [
     "argparse>=1.4.0",
     "pre-commit>=4.2.0",
