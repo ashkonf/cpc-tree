@@ -16,8 +16,8 @@ def load_cpc_tree(data: Dict[str, Any]) -> Dict[str, "CPCTreeNode"]:
     """Recursively loads a CPC tree from a nested dictionary."""
 
     def _load_node(code: str, node_data: Dict[str, Any]) -> "CPCTreeNode":
-        children_data = node_data.get("children", {})
-        children = {
+        children_data: Dict[str, Any] = node_data.get("children", {})
+        children: Dict[str, CPCTreeNode] = {
             child_code: _load_node(child_code, child_data)
             for child_code, child_data in children_data.items()
         }
