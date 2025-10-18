@@ -15,98 +15,75 @@ A Python utility for processing and structuring Cooperative Patent Classificatio
 </div>
 
 ## Table of Contents
+
 - [Overview](#overview)
-- [Requirements](#requirements)
-- [Installation](#installation)
-  - [Using UV (Recommended)](#using-uv-recommended)
-  - [Using pip](#using-pip)
+- [Dependencies](#dependencies)
 - [Usage](#usage)
-  - [Command Line Interface](#command-line-interface)
-  - [Python API](#python-api)
-    - [Building the CPC Tree](#building-the-cpc-tree)
-    - [Loading the Generated JSON as Objects](#loading-the-generated-json-as-objects)
-- [Data Structure](#data-structure)
+  - [Setup](#setup)
+  - [Download Prerequisite Data](#download-prerequisite-data)
+  - [Build the CPC Tree via the CLI](#build-the-cpc-tree-via-the-cli)
+  - [Build the CPC Tree in Code](#build-the-cpc-tree-in-code)
+  - [Load the CPC Tree in Code](#load-the-cpc-tree-in-code)
+  - [Jupyter Notebook](#jupyter-notebook)
+- [Data Structure Breakdown](#data-structure-breakdown)
 - [API Reference](#api-reference)
   - [Functions](#functions)
   - [Classes](#classes)
 - [Development](#development)
-  - [Setup](#setup)
+  - [Setup](#setup-1)
   - [Running Tests](#running-tests)
   - [Code Quality](#code-quality)
   - [Project Structure](#project-structure)
 - [Contributing](#contributing)
+- [License](#license)
 
 ## Overview
 
-The Cooperative Patent Classification (CPC) system is a hierarchical classification scheme used by patent offices worldwide. CPC-Tree simplifies working with this complex data by:
+The Cooperative Patent Classification (CPC) system is a hierarchical classification scheme used by patent offices worldwide. `cpc-tree` simplifies working with this data by:
 
 - Converting distributed XML classification files into structured Python objects
 - Providing both dictionary-based and object-oriented interfaces for navigation
 - Exporting classification hierarchies to JSON for use in other applications
 - Enabling programmatic access to CPC data for patent analysis workflows
 
-**Target Users**: Patent researchers, classification analysts, and developers building applications that work with patent classification systems.
+## Dependencies
 
-## Requirements
-
-- Python ≥ 3.13
-- UV package manager (recommended) or pip
-
-## Installation
-
-### Using UV (Recommended)
-
-```bash
-# Clone the repository
-git clone https://github.com/ashkonf/cpc-tree.git
-cd cpc-tree
-
-# Install dependencies
-uv sync
-```
-
-### Using pip
-
-```bash
-# Clone the repository
-git clone https://github.com/ashkonf/cpc-tree.git
-cd cpc-tree
-
-# Install dependencies
-pip install -e .
-```
+- Python ≥ 3.11
+- `uv` package manager
 
 ## Usage
 
-For an interactive introduction, see the [sample_usage.ipynb](examples/sample_usage.ipynb) notebook.
+### Setup
 
-### Command Line Interface
-
-Process CPC XML files from a directory containing the classification scheme:
+First clone this repository:
 
 ```bash
-# Using UV
-uv run python -m cpc_tree /path/to/xml/directory
+git clone https://github.com/ashkonf/cpc-tree.git
+cd cpc-tree
+```
 
-# Using Python directly
-python -m cpc_tree /path/to/xml/directory
+Then install dependencies:
+
+```bash
+uv sync
+```
+
+### Download Prerequisite Data
+
+Download and decompress [CPCSchemeXML202508.zip](https://www.cooperativepatentclassification.org/sites/default/files/cpc/bulk/CPCSchemeXML202508.zip) in the repo directory.
+
+### Build the CPC Tree via the CLI
+
+```bash
+uv run python -m src.cpc_tree /path/to/xml/directory
 ```
 
 This will generate a `cpc_tree.json` file containing the complete CPC hierarchy.
 
-**Input Requirements**: The XML directory should contain:
-- `cpc-scheme.xml` (main classification file)
-- Additional linked XML files referenced by the scheme
+### Build the CPC Tree in Code
 
-### Python API
-
-#### Building the CPC Tree
-
-Download and decompress [CPCSchemeXML202508.zip](https://www.cooperativepatentclassification.org/sites/default/files/cpc/bulk/CPCSchemeXML202508.zip) in the repo directory.
-
-Then run:
 ```python
-from cpc_tree import build_cpc_tree
+from src.cpc_tree import build_cpc_tree
 
 # Parse XML files and build dictionary tree
 cpc_tree_data = build_cpc_tree("CPCSchemeXML202508")
@@ -116,7 +93,9 @@ print(cpc_tree_data["A"]["title"])  # "HUMAN NECESSITIES"
 print(cpc_tree_data["A"]["children"]["A01"]["title"])  # "AGRICULTURE"
 ```
 
-#### Loading the Generated JSON as Objects
+This will also generate the same `cpc_tree.json` file.
+
+### Load the CPC Tree in Code
 
 ```python
 from cpc_tree import build_cpc_tree, load_cpc_tree
@@ -135,7 +114,11 @@ agriculture_node = root_node.children["A01"]
 print(f"Agriculture: {agriculture_node.title}")  # "AGRICULTURE"
 ```
 
-## Data Structure
+### Jupyter Notebook
+
+For an interactive overview of the steps above in code, see the [sample_usage.ipynb](examples/sample_usage.ipynb) notebook.
+
+## Data Structure Breakdown
 
 The CPC tree follows a hierarchical structure:
 
@@ -201,16 +184,12 @@ uv run pre-commit install
 
 ### Running Tests
 
-Download and decompress CPCSchemeXML202508.zip in the repo directory.
+First download and decompress [CPCSchemeXML202508.zip](https://www.cooperativepatentclassification.org/sites/default/files/cpc/bulk/CPCSchemeXML202508.zip) in the repo directory.
 
 Then run:
 
 ```bash
-# Run all tests
 uv run python -m pytest
-
-# Run with verbose output
-uv run python -m pytest -v
 ```
 
 ### Code Quality
@@ -248,9 +227,13 @@ cpc-tree/
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+2. Create a feature branch: `git checkout -b username/amazing-feature`
 3. Make your changes
-4. Run tests and quality checks (`uv run pre-commit run --all-files`)
-5. Commit your changes (`git commit -m 'Add amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+4. Run tests and quality checks: `uv run pre-commit run --all-files`
+5. Commit your changes: `git commit -m 'Add amazing feature'`
+6. Push to the branch: `git push origin feature/amazing-feature`
+7. Open a Pull Request against `main`
+
+## License
+
+This project is licensed under the Apache License, Version 2.0. See the `LICENSE` file for more details.
